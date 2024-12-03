@@ -3,6 +3,6 @@ on:
 
 jobs:
   run:
-    uses: tarcanscloud/test-github-workflows/.github/workflows/base_deploy.yml
+    uses: tarcanscloud/test-github-workflows/.github/workflows/base_deploy.yml@main
     with:
       environment: sit
