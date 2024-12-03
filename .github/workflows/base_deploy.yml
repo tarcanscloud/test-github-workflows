@@ -1,0 +1,44 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tarcanscloud/test-github-workflows/.github/actions/prepare.yml
+
+  build:
+    needs:
+      - prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tarcanscloud/test-github-workflows/.github/actions/build.yml
+
+  test:
+    needs:
+      - prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tarcanscloud/test-github-workflows/.github/actions/test.yml
+
+  container-scan:
+    needs:
+      - prepare
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tarcanscloud/test-github-workflows/.github/actions/container-scan.yml
+
+  deploy:
+    needs:
+      - prepare
+      - build
+      - test
+      - container-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tarcanscloud/test-github-workflows/.github/actions/deploy.yml
