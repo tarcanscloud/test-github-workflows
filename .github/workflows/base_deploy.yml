@@ -9,21 +9,21 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
-      - uses: tarcanscloud/test-github-workflows/.github/actions/prepare.yml@main
+      - uses: tarcanscloud/test-github-workflows/.github/actions/prepare@main
 
   build:
     needs:
       - prepare
     runs-on: ubuntu-latest
     steps:
-      - uses: tarcanscloud/test-github-workflows/.github/actions/build.yml@main
+      - uses: tarcanscloud/test-github-workflows/.github/actions/build@main
 
   test:
     needs:
       - prepare
     runs-on: ubuntu-latest
     steps:
-      - uses: tarcanscloud/test-github-workflows/.github/actions/test.yml@main
+      - uses: tarcanscloud/test-github-workflows/.github/actions/test@main
 
   container-scan:
     needs:
@@ -31,7 +31,7 @@ jobs:
       - build
     runs-on: ubuntu-latest
     steps:
-      - uses: tarcanscloud/test-github-workflows/.github/actions/container-scan.yml@main
+      - uses: tarcanscloud/test-github-workflows/.github/actions/container-scan@main
 
   deploy:
     needs:
@@ -41,4 +41,4 @@ jobs:
       - container-scan
     runs-on: ubuntu-latest
     steps:
-      - uses: tarcanscloud/test-github-workflows/.github/actions/deploy.yml@main
+      - uses: tarcanscloud/test-github-workflows/.github/actions/deploy@main
